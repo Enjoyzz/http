@@ -21,18 +21,32 @@ class ServerRequest implements ServerRequestInterface
     protected \Psr\Http\Message\ServerRequestInterface $request;
     private array $query = [];
 
+    /**
+     * 
+     * @param \Psr\Http\Message\ServerRequestInterface|null $request
+     */
     public function __construct(?\Psr\Http\Message\ServerRequestInterface $request = null)
     {
         $this->request = $request ?? \HttpSoft\ServerRequest\ServerRequestCreator::create();
         $this->query = $this->request->getQueryParams();
     }
 
+    /**
+     * 
+     * @return \Psr\Http\Message\ServerRequestInterface
+     */
     public function getRequest(): \Psr\Http\Message\ServerRequestInterface
     {
         return $this->request;
     }
 
-    public function get($key = null, $default = null)
+    /**
+     * 
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function get(string $key = null, $default = null)
     {
         if ($key === null) {
             return $this->query;
@@ -43,14 +57,25 @@ class ServerRequest implements ServerRequestInterface
         return $default;
     }
 
-    public function addQuery(array $params = [])
+    /**
+     * 
+     * @param array $params
+     * @return void
+     */
+    public function addQuery(array $params = []): void
     {
         foreach ($params as $key => $value) {
             $this->query[$key] = $value;
         }
     }
 
-    public function post($key = null, $default = null)
+    /**
+     * 
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function post(string $key = null, $default = null)
     {
         if ($key === null) {
             return $this->request->getParsedBody();
@@ -61,7 +86,12 @@ class ServerRequest implements ServerRequestInterface
         return $default;
     }
 
-    public function server($key = null)
+    /**
+     * 
+     * @param string $key
+     * @return array|null
+     */
+    public function server(string $key = null): ?array
     {
         if ($key === null) {
             return $this->request->getServerParams();
@@ -73,7 +103,12 @@ class ServerRequest implements ServerRequestInterface
         return null;
     }
 
-    public function files($key = null)
+    /**
+     * 
+     * @param string $key
+     * @return mixed
+     */
+    public function files(string $key = null)
     {
         if ($key === null) {
             return $this->request->getUploadedFiles();
@@ -84,7 +119,11 @@ class ServerRequest implements ServerRequestInterface
         return null;
     }
 
-    public function getMethod()
+    /**
+     * 
+     * @return string
+     */
+    public function getMethod(): string
     {
 
         return $this->request->getMethod();
