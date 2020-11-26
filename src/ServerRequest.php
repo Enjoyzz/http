@@ -15,7 +15,7 @@ namespace Enjoys\Http;
  *
  * @author Enjoys
  */
-class ServerRequest
+class ServerRequest implements ServerRequestInterface
 {
 
     protected \Psr\Http\Message\ServerRequestInterface $request;
