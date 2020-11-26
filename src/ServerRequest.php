@@ -73,6 +73,17 @@ class ServerRequest implements ServerRequestInterface
         return null;
     }
 
+    public function files($key = null): ?array
+    {
+        if ($key === null) {
+            return $this->request->getUploadedFiles();
+        }
+        if (array_key_exists($key, $this->request->getUploadedFiles())) {
+            return $this->request->getUploadedFiles()[$key];
+        }
+        return null;
+    }
+
     public function getMethod()
     {
 
