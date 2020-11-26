@@ -1,23 +1,22 @@
 {
-    "name": ":vendor/:package_name",
+    "name": "enjoys/http",
     "type": "library",
-    "description": ":package_description",
+    "description": "",
     "keywords": [
-        ":vendor",
-        ":package_name"
+        "enjoys",
+        "http"
     ],
-    "homepage": "https://github.com/:vendor/:package_name",
+    "homepage": "https://github.com/enjoys/http",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": ":author_website",
+            "name": "Enjoys",
+            "email": "deadly.info@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php" : "~7.4"
+        "httpsoft/http-message": "^1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "^9.4",
@@ -25,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            ":vendor\\:package_name\\": "src"
+            "Enjoys\\Http\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            ":vendor\\:package_name\\": "tests"
+            "Tests\\Enjoys\\Http\\": "tests/"
         }
     },
     "scripts": {
