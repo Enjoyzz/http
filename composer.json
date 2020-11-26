@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "httpsoft/http-message": "^1.0.0"
+        "httpsoft/http-server-request": "^1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "^9.4",

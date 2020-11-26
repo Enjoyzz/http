@@ -15,28 +15,67 @@ namespace Enjoys\Http;
  *
  * @author Enjoys
  */
-class ServerRequest extends \HttpSoft\Message\ServerRequest
+class ServerRequest
 {
+
+    protected \Psr\Http\Message\ServerRequestInterface $request;
+    private array $query = [];
+
+    public function __construct(?\Psr\Http\Message\ServerRequestInterface $request = null)
+    {
+        $this->request = $request ?? \HttpSoft\ServerRequest\ServerRequestCreator::create();
+        $this->query = $this->request->getQueryParams();
+    }
+
+    public function getRequest(): \Psr\Http\Message\ServerRequestInterface
+    {
+        return $this->request;
+    }
 
     public function get($key = null, $default = null)
     {
         if ($key === null) {
-            return $this->getQueryParams();
+            return $this->query;
         }
-
-        if (array_key_exists($key, $this->getQueryParams())) {
-            return $this->getQueryParams()[$key];
+        if (array_key_exists($key, $this->query)) {
+            return $this->query[$key];
         }
     }
-
+    
+    public function addQuery(array $params = [])
+    {
+        foreach ($params as $key => $value) {
+            $this->query[$key] = $value;
+        }
+        
+    }
+    
     public function post($key = null, $default = null)
     {
         if ($key === null) {
-            return $this->getParsedBody();
+            return $this->request->getParsedBody();
         }
-        if (array_key_exists($key, $this->getParsedBody())) {
-            return $this->getParsedBody()[$key];
+        if (array_key_exists($key, $this->request->getParsedBody())) {
+            return $this->request->getParsedBody()[$key];
         }
         return $default;
+    }
+
+    public function server($key = null)
+    {
+        if ($key === null) {
+            return $this->request->getServerParams();
+        }
+        if (array_key_exists($key, $this->request->getServerParams())) {
+            return $this->request->getServerParams()[$key];
+        }
+
+        return null;
+    }
+
+    public function getMethod()
+    {
+
+        return $this->request->getMethod();
     }
 }
