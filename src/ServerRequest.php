@@ -40,16 +40,16 @@ class ServerRequest implements ServerRequestInterface
         if (array_key_exists($key, $this->query)) {
             return $this->query[$key];
         }
+        return $default;
     }
-    
+
     public function addQuery(array $params = [])
     {
         foreach ($params as $key => $value) {
             $this->query[$key] = $value;
         }
-        
     }
-    
+
     public function post($key = null, $default = null)
     {
         if ($key === null) {
