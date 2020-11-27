@@ -24,10 +24,14 @@ class ServerRequest implements ServerRequestInterface
     /**
      * 
      * @param \Psr\Http\Message\ServerRequestInterface|null $request
+     * @param \HttpSoft\ServerRequest\ServerNormalizerInterface|null $normalizer
      */
-    public function __construct(?\Psr\Http\Message\ServerRequestInterface $request = null)
+    public function __construct(
+            ?\Psr\Http\Message\ServerRequestInterface $request = null,
+            ?\HttpSoft\ServerRequest\ServerNormalizerInterface $normalizer = null
+    )
     {
-        $this->request = $request ?? \HttpSoft\ServerRequest\ServerRequestCreator::create();
+        $this->request = $request ?? \HttpSoft\ServerRequest\ServerRequestCreator::create($normalizer);
         $this->query = $this->request->getQueryParams();
     }
 
