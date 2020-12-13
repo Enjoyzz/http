@@ -1,14 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 declare(strict_types=1);
 
 namespace Enjoys\Http;
+
+use HttpSoft\ServerRequest\ServerNormalizerInterface;
+use HttpSoft\ServerRequest\ServerRequestCreator;
 
 /**
  * Class ServerRequest
@@ -24,14 +21,14 @@ class ServerRequest implements ServerRequestInterface
     /**
      * 
      * @param \Psr\Http\Message\ServerRequestInterface|null $request
-     * @param \HttpSoft\ServerRequest\ServerNormalizerInterface|null $normalizer
+     * @param ServerNormalizerInterface|null $normalizer
      */
     public function __construct(
             ?\Psr\Http\Message\ServerRequestInterface $request = null,
-            ?\HttpSoft\ServerRequest\ServerNormalizerInterface $normalizer = null
+            ?ServerNormalizerInterface $normalizer = null
     )
     {
-        $this->request = $request ?? \HttpSoft\ServerRequest\ServerRequestCreator::create($normalizer);
+        $this->request = $request ?? ServerRequestCreator::create($normalizer);
         $this->query = $this->request->getQueryParams();
     }
 
@@ -45,12 +42,12 @@ class ServerRequest implements ServerRequestInterface
     }
 
     /**
-     * 
-     * @param string $key
+     *
+     * @param string|null $key
      * @param mixed $default
      * @return mixed
      */
-    public function get(string $key = null, $default = null)
+    public function get(?string $key = null, $default = null)
     {
         if ($key === null) {
             return $this->query;
@@ -74,12 +71,12 @@ class ServerRequest implements ServerRequestInterface
     }
 
     /**
-     * 
-     * @param string $key
+     *
+     * @param string|null $key
      * @param mixed $default
      * @return mixed
      */
-    public function post(string $key = null, $default = null)
+    public function post(?string $key = null, $default = null)
     {
         if ($key === null) {
             return $this->request->getParsedBody();
@@ -91,11 +88,11 @@ class ServerRequest implements ServerRequestInterface
     }
 
     /**
-     * 
-     * @param string $key
-     * @return array|null
+     *
+     * @param string|null $key
+     * @return mixed
      */
-    public function server(string $key = null): ?array
+    public function server(?string $key = null)
     {
         if ($key === null) {
             return $this->request->getServerParams();
@@ -108,11 +105,11 @@ class ServerRequest implements ServerRequestInterface
     }
 
     /**
-     * 
-     * @param string $key
+     *
+     * @param string|null $key
      * @return mixed
      */
-    public function files(string $key = null)
+    public function files(?string $key = null)
     {
         if ($key === null) {
             return $this->request->getUploadedFiles();
