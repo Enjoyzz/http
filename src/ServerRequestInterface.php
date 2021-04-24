@@ -24,7 +24,7 @@ interface ServerRequestInterface
     public function get(?string $key = null, $default = null);
 
     /**
-     * 
+     *
      * @param array $params
      * @return void
      */
@@ -53,7 +53,7 @@ interface ServerRequestInterface
     public function files(?string $key = null);
 
     /**
-     * 
+     *
      * @return string
      */
     public function getMethod(): string;

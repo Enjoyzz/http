@@ -28,7 +28,11 @@ class ServerRequestTest extends TestCase
     {
         $request = new ServerRequest(
             new \HttpSoft\Message\ServerRequest(
-                [], [], [], [], [
+                [],
+                [],
+                [],
+                [],
+                [
                       'test' => 'value'
                   ]
             )
@@ -68,7 +72,10 @@ class ServerRequestTest extends TestCase
     {
         $request = new ServerRequest(
             new \HttpSoft\Message\ServerRequest(
-                [], [], [], [
+                [],
+                [],
+                [],
+                [
                       'test' => 'value'
                   ]
             )
@@ -94,7 +101,10 @@ class ServerRequestTest extends TestCase
     {
         $request = new ServerRequest(
             new \HttpSoft\Message\ServerRequest(
-                [], [], [], [
+                [],
+                [],
+                [],
+                [
                       'test' => 'value'
                   ]
             )

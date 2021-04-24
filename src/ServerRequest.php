@@ -19,21 +19,20 @@ class ServerRequest implements ServerRequestInterface
     private array $query = [];
 
     /**
-     * 
+     *
      * @param \Psr\Http\Message\ServerRequestInterface|null $request
      * @param ServerNormalizerInterface|null $normalizer
      */
     public function __construct(
-            ?\Psr\Http\Message\ServerRequestInterface $request = null,
-            ?ServerNormalizerInterface $normalizer = null
-    )
-    {
+        ?\Psr\Http\Message\ServerRequestInterface $request = null,
+        ?ServerNormalizerInterface $normalizer = null
+    ) {
         $this->request = $request ?? ServerRequestCreator::create($normalizer);
         $this->query = $this->request->getQueryParams();
     }
 
     /**
-     * 
+     *
      * @return \Psr\Http\Message\ServerRequestInterface
      */
     public function getRequest(): \Psr\Http\Message\ServerRequestInterface
@@ -59,7 +58,7 @@ class ServerRequest implements ServerRequestInterface
     }
 
     /**
-     * 
+     *
      * @param array $params
      * @return void
      */
@@ -121,12 +120,11 @@ class ServerRequest implements ServerRequestInterface
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function getMethod(): string
     {
-
         return $this->request->getMethod();
     }
 }
